@@ -22,7 +22,7 @@
         {{-- Contenedor de botones de acción --}}
         <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
             {{-- Botón para Iniciar Sesión --}}
-            <a href="#" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+            <a href="{{route('login')}}" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
                 Iniciar Sesión
                 <svg class="w-4 h-4 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h11m0 0-4-4m4 4-4 4m-4 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h2"/>
@@ -30,7 +30,7 @@
             </a>
 
             {{-- Botón para Crear Cuenta --}}
-            <a href="#" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-blue-600 bg-white border border-blue-600 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+            <a href="{{route('register')}}" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-blue-600 bg-white border border-blue-600 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
                 Crear Cuenta
                 <svg class="w-4 h-4 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>

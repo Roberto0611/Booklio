@@ -10,10 +10,8 @@
 <body>
 
     <header>
-        {{-- nav bar --}}
-         <x-navbar/>
+        <x-navbar :show="!isset($hideNavbar)" /> <!-- Navbar visible por defecto -->
     </header>
-
     @yield('content')
 
     <footer></footer>
