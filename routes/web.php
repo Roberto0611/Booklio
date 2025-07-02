@@ -9,10 +9,10 @@ Route::get('/', function () {
 
 Route::get('/books', function () {
     return view('books.index');
-});
+})->name('books.index');
 
 Route::get('/books/{book}',function($id){
     $book = Book::find($id);
 
     return view('books.show',compact('book'));
-});
+})->name('books.show');

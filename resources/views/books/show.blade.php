@@ -2,9 +2,20 @@
 
 @section('content')
 {{-- Contenedor principal con fondo para toda la página --}}
-<div class="min-h-screen bg-gray-100 dark:bg-gray-900 py-10 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+<div class="min-h-screen bg-gray-100 dark:bg-gray-900 py-10 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+
+    {{-- Botón de Regresar --}}
+    <div class="max-w-5xl w-full mb-6">
+        <a href="{{ url()->previous() }}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-200 ease-in-out">
+            <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+            </svg>
+            Regresar
+        </a>
+    </div>
+
     {{-- Contenedor centrado para la tarjeta del libro --}}
-    <div class="max-w-5xl w-full bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-[1.01]">
+    <div class="max-w-5xl w-full bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-[1.01] mb-10"> {{-- Añadido mb-10 para espacio con la sección de reseñas --}}
         <div class="md:flex">
             {{-- Sección de la imagen de portada --}}
             <div class="md:flex-shrink-0 md:w-1/3 p-6 flex items-center justify-center">
@@ -58,6 +69,34 @@
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    {{-- Sección de Reseñas --}}
+    <div class="max-w-5xl w-full bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
+            Reseñas
+        </h2>
+
+        {{-- Contenedor para las reseñas (vacío por ahora) --}}
+        <div class="space-y-6">
+            <p class="text-gray-600 dark:text-gray-400">
+                Aún no hay reseñas para este libro. ¡Sé el primero en escribir una!
+            </p>
+            {{-- Aquí se mostrarán las reseñas dinámicamente en el futuro --}}
+            {{-- Ejemplo de una reseña --}}
+            
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                <div class="flex items-center mb-2">
+                    <img class="w-8 h-8 rounded-full mr-3" src="https://placehold.co/32x32/cccccc/333333?text=U" alt="User Avatar">
+                    <p class="font-semibold text-gray-800 dark:text-gray-200">Nombre de Usuario</p>
+                    <span class="text-sm text-gray-500 dark:text-gray-400 ml-auto">25 de Junio, 2025</span>
+                </div>
+                <p class="text-gray-700 dark:text-gray-300 text-sm">
+                    ¡Este libro es increíble! Me ayudó a cambiar mis hábitos de una manera muy efectiva. Totalmente recomendado.
+                </p>
+            </div>
+            
         </div>
     </div>
 </div>
