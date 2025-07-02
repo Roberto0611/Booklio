@@ -63,14 +63,17 @@
                     <button type="button" class="py-3 px-6 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-200 ease-in-out transform hover:-translate-y-1">
                         Añadir a lista de deseos
                     </button>
-                    {{-- Puedes añadir más botones aquí, por ejemplo para dejar una reseña --}}
-                    <button type="button" class="py-3 px-6 text-base font-medium text-gray-900 focus:outline-none bg-yellow-400 rounded-lg border border-yellow-500 hover:bg-yellow-500 hover:text-white focus:z-10 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-700 dark:bg-yellow-500 dark:text-gray-900 dark:border-yellow-600 dark:hover:text-white dark:hover:bg-yellow-600 transition duration-200 ease-in-out transform hover:-translate-y-1">
-                        Escribir reseña
+                    <!-- Modal toggle -->
+                    <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="py-3 px-6 text-base font-medium text-gray-900 focus:outline-none bg-yellow-400 rounded-lg border border-yellow-500 hover:bg-yellow-500 hover:text-white focus:z-10 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-700 dark:bg-yellow-500 dark:text-gray-900 dark:border-yellow-600 dark:hover:text-white dark:hover:bg-yellow-600 transition duration-200 ease-in-out transform hover:-translate-y-1" type="button">
+                    Escribir reseña
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- Modal --}}
+    <x-modalReview></x-modalReview>
 
     {{-- Sección de Reseñas --}}
     <div class="max-w-5xl w-full bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8">
