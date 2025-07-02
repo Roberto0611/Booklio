@@ -11,6 +11,12 @@ Route::get('/books', function () {
     return view('books.index');
 })->name('books.index');
 
+Route::get('/books/catalog', function () {
+    $books = Book::all();
+
+    return view('books.catalog',compact('books'));
+})->name('books.catalog');
+
 Route::get('/books/{book}',function($id){
     $book = Book::find($id);
 
