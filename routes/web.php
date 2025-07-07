@@ -15,6 +15,10 @@ Route::get('/books/catalog', [BookController::class, 'catalog'])->name('books.ca
 
 Route::get('/books/{book}',[BookController::class, 'show'])->name('books.show')->middleware('auth');
 
+Route::get('/profile/details', function () {
+    return view('profile.details');
+})->name('profile')->middleware('auth');
+
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 
 Route::get('/register', [LoginController::class, 'indexRegister'])->name('register');

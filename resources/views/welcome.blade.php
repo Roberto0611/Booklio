@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['hideNavbar' => true]) {{-- Oculta el navbar --}}
 
 @section('content')
 {{-- Sección Principal (Hero) --}}

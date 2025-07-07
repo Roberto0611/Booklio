@@ -32,7 +32,7 @@
 
     {{-- Campo de Nombre --}}
     <div>
-        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tu nombre</label>
+        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de usuario</label>
         <input type="text" name="name" id="name"
                value="{{ old('name') }}"
                class="bg-gray-50 border @error('name') border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
