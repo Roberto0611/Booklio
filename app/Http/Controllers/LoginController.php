@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         # DATA VALIDATION
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users,name',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed', 
         ]);
@@ -33,6 +33,7 @@ class LoginController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->bio = 'Hola booklio, soy un nuevo usuario :)';
         $user->password = Hash::make($request->password);
 
         $user->save();

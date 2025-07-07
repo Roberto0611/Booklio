@@ -19,17 +19,12 @@
                 <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white mb-2">
                     {{Auth::user()->name}}
                 </h1>
-                <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
-                    @usuario_booklio {{-- Placeholder para el handle de usuario --}}
-                </p>
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed max-w-2xl md:mx-0 mx-auto">
-                    Esta es la biografía del usuario. Aquí puede escribir sobre sus gustos literarios,
-                    sus géneros favoritos, o cualquier cosa que quiera compartir con la comunidad de Booklio.
-                    Soy un apasionado lector de ciencia ficción y fantasía, y siempre busco nuevas recomendaciones.
+                    {{Auth::user()->bio}}
                 </p>
                 {{-- Botón de Editar Información --}}
                 <div class="mt-6">
-                    <a href="#" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg">
+                    <a href="{{route('editProfile')}}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg">
                         <svg class="w-5 h-5 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                         Editar Perfil
                     </a>
