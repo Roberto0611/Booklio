@@ -27,7 +27,7 @@
             </p>
         </div>
 
-        <form class="space-y-6" action="#" method="POST"> {{-- Reemplaza '#' con tu ruta de login --}}
+        <form class="space-y-6" action="{{route('loginLogic')}}" method="POST"> 
             @csrf {{-- Token CSRF de Laravel --}}
 
             {{-- Campo de Correo Electrónico --}}

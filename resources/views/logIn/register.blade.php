@@ -27,7 +27,7 @@
             </p>
         </div>
 
-        <form class="space-y-6" action="#" method="POST"> {{-- Reemplaza '#' con tu ruta de registro --}}
+        <form class="space-y-6" action="{{route('validad-registro')}}" method="POST"> {{-- Reemplaza '#' con tu ruta de registro --}}
             @csrf {{-- Token CSRF de Laravel --}}
 
             {{-- Campo de Nombre --}}
