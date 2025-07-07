@@ -27,43 +27,68 @@
             </p>
         </div>
 
-        <form class="space-y-6" action="{{route('validad-registro')}}" method="POST"> {{-- Reemplaza '#' con tu ruta de registro --}}
-            @csrf {{-- Token CSRF de Laravel --}}
+        <form class="space-y-6" action="{{ route('validad-registro') }}" method="POST">
+    @csrf
 
-            {{-- Campo de Nombre --}}
-            <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tu nombre</label>
-                <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Juan Pérez" required>
-            </div>
+    {{-- Campo de Nombre --}}
+    <div>
+        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tu nombre</label>
+        <input type="text" name="name" id="name"
+               value="{{ old('name') }}"
+               class="bg-gray-50 border @error('name') border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+               dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder="Juan Pérez" required>
+        @error('name')
+            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+        @enderror
+    </div>
 
-            {{-- Campo de Correo Electrónico --}}
-            <div>
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tu correo electrónico</label>
-                <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nombre@ejemplo.com" required>
-            </div>
+    {{-- Campo de Correo Electrónico --}}
+    <div>
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tu correo electrónico</label>
+        <input type="email" name="email" id="email"
+               value="{{ old('email') }}"
+               class="bg-gray-50 border @error('email') border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+               dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder="nombre@ejemplo.com" required>
+        @error('email')
+            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+        @enderror
+    </div>
 
-            {{-- Campo de Contraseña --}}
-            <div>
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tu contraseña</label>
-                <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-            </div>
+    {{-- Campo de Contraseña --}}
+    <div>
+        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tu contraseña</label>
+        <input type="password" name="password" id="password"
+               class="bg-gray-50 border @error('password') border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+               dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder="••••••••" required>
+        @error('password')
+            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+        @enderror
+    </div>
 
-            {{-- Campo de Confirmar Contraseña --}}
-            <div>
-                <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar contraseña</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-            </div>
+    {{-- Campo de Confirmar Contraseña --}}
+    <div>
+        <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar contraseña</label>
+        <input type="password" name="password_confirmation" id="password_confirmation"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+               dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder="••••••••" required>
+    </div>
 
-            {{-- Botón de Registrarse --}}
-            <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition duration-200 ease-in-out transform hover:-translate-y-0.5">
-                Registrarse
-            </button>
+    {{-- Botón de Registrarse --}}
+    <button type="submit"
+            class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition duration-200 ease-in-out transform hover:-translate-y-0.5">
+        Registrarse
+    </button>
 
-            {{-- Enlace para Iniciar Sesión --}}
-            <p class="text-sm font-light text-gray-500 dark:text-gray-400 text-center">
-                ¿Ya tienes una cuenta? <a href="{{route('login')}}" class="font-medium text-blue-700 hover:underline dark:text-blue-500">Iniciar Sesión</a>
-            </p>
-        </form>
+    {{-- Enlace para Iniciar Sesión --}}
+    <p class="text-sm font-light text-gray-500 dark:text-gray-400 text-center">
+        ¿Ya tienes una cuenta?
+        <a href="{{ route('login') }}" class="font-medium text-blue-700 hover:underline dark:text-blue-500">Iniciar Sesión</a>
+    </p>
+</form>
     </div>
 </div>
 @endsection

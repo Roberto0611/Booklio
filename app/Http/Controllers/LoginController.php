@@ -21,7 +21,13 @@ class LoginController extends Controller
 
     # Functions for login
     public function register(Request $request){
-        # Important here add data validation
+
+        # DATA VALIDATION
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed', 
+        ]);
 
         $user = new User();
 
@@ -60,7 +66,7 @@ class LoginController extends Controller
 
             return redirect()->intended(route('books.index'));
         }else{
-            return redirect('login');
+            return back()->withErrors(['email' => 'Las credenciales no coinciden.',])->onlyInput('email');
         }
     }
 }
