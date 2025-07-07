@@ -26,6 +26,14 @@ class ProfileController extends Controller
             'bio' => 'nullable|string|max:255',
         ]);
 
+        if($request->hasFile('profile_picture')){
+            $image = $request->profile_picture;
+            $imageName = rand().'_'.$image->getClientOriginalName();
+            $image->move(public_path('uploads'),$imageName);
+            $path = "/uploads/".$imageName;
+            $user->photo = $path;
+        }
+
         $user->name = $request->username;
         $user->bio = $request->bio;
 

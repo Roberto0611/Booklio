@@ -10,7 +10,7 @@
             {{-- Foto de Perfil --}}
             <div class="flex-shrink-0">
                 <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-blue-500 dark:border-blue-400 shadow-lg"
-                     src="https://placehold.co/160x160/2563EB/FFFFFF?text=Usuario" {{-- Placeholder para la foto de perfil --}}
+                     src="{{Auth::user()->photo}}" 
                      alt="Foto de perfil de [Nombre de Usuario]">
             </div>
 

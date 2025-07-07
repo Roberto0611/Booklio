@@ -16,7 +16,9 @@
                                 data-dropdown-placement="bottom">
                                 <span class="sr-only">Open user menu</span>
                                 <img class="w-8 h-8 rounded-full"
-                                    src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff"
+                                    src="@auth
+                                            {{Auth::user()->photo}}
+                                        @endauth "
                                     alt="user photo">
                             </button>
                             <!-- Dropdown menu -->
@@ -41,17 +43,8 @@
                                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Perfil</a>
                                     </li>
                                     <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-                                    </li>
-                                    <li>
                                         <a href="{{route('logout')}}"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-                                            out</a>
+                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Cerrar sesion</a>
                                     </li>
                                 </ul>
                             </div>

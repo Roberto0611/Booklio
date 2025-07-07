@@ -36,6 +36,9 @@ class LoginController extends Controller
         $user->bio = 'Hola booklio, soy un nuevo usuario :)';
         $user->password = Hash::make($request->password);
 
+        // Guardar un placeholder (URL pública)
+        $user->photo = 'https://placehold.co/200x200/2563EB/FFFFFF?text=' . urlencode(substr($user->name, 0, 1)); 
+
         $user->save();
 
         Auth::login($user);

@@ -50,7 +50,7 @@
                     <label for="profile_picture" class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Foto
                         de Perfil</label>
                     <img class="w-32 h-32 rounded-full object-cover border-4 border-blue-500 dark:border-blue-400 shadow-lg mb-4"
-                        id="current_profile_picture" src="https://placehold.co/128x128/2563EB/FFFFFF?text=Usuario"
+                        id="current_profile_picture" src="{{Auth::user()->photo}}"
                         alt="Foto de perfil actual">
                     <input
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"

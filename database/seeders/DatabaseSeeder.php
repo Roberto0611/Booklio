@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,8 +22,11 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Roberto',
             'email' => 'neweobgamer2@gmail.com',
-            'password' => bcrypt('12345678'),
+            'password' => Hash::make('12345678'),
+            'bio' => 'Apasionado de la lectura y desarrollador en mis tiempos libres',
         ]);
+
+        User::factory(3)->withLongBio()->create();
         
         // Seeder for books
         $book = new Book();
