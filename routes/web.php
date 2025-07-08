@@ -18,6 +18,8 @@ Route::get('/books/catalog', [BookController::class, 'catalog'])->name('books.ca
 
 Route::get('/books/{book}',[BookController::class, 'show'])->name('books.show')->middleware('auth');
 
+Route::get('/books/{book}/toggle-read',[BookController::class, 'toggleRead'])->name('books.toggleRead')->middleware('auth');
+
 // -------  Profile routes ------- 
 
 Route::get('/profile/details', [ProfileController::class, 'details'])->name('profile')->middleware('auth');

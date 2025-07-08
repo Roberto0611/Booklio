@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books_user', function (Blueprint $table) {
+        Schema::create('book_user', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('book_id')->constrained()->onDelete('cascade');
 
-            $table->tinyInteger('rating')->nullable(); // 1–5
-            $table->text('review')->nullable();
             $table->date('read_at')->nullable(); // fecha en que lo leyó
             $table->boolean('is_readed')->default(false); // si lo ha leido
             $table->boolean('is_favorite')->default(false); // si es favorito
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books_users');
+        Schema::dropIfExists('book_user');
     }
 };

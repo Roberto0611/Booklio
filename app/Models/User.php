@@ -46,4 +46,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function books(){
+        return $this->belongsToMany(Book::class)
+                    ->withPivot('is_readed') // agrega los campos que estés usando
+                    ->withTimestamps(); // útil si tienes created_at y updated_at
+    }
 }
