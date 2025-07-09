@@ -18,7 +18,9 @@ Route::get('/books/catalog', [BookController::class, 'catalog'])->name('books.ca
 
 Route::get('/books/{book}',[BookController::class, 'show'])->name('books.show')->middleware('auth');
 
-Route::get('/books/{book}/toggle-read',[BookController::class, 'toggleRead'])->name('books.toggleRead')->middleware('auth');
+Route::get('/books/{book}/markAsread',[BookController::class, 'markAsRead'])->name('books.markAsRead')->middleware('auth');
+
+Route::get('/books/{book}/unread',[BookController::class, 'markAsUnRead'])->name('books.markAsUnRead')->middleware('auth');
 
 // -------  Profile routes ------- 
 

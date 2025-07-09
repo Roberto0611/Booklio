@@ -24,7 +24,7 @@ class BookController extends Controller
         return view('books.show',compact('book'));
     }
 
-    public function toggleRead($id){
+    public function markAsRead($id){
         $user = Auth::user();
         
         // Verifica si ya existe la relación
@@ -36,6 +36,21 @@ class BookController extends Controller
             $user->books()->attach($id, ['is_readed' => 1]);
         }
 
-        return response()->json(['message' => 'Estado de lectura actualizado']);
+        return back();
+    }
+
+    public function markAsUnRead($id){
+        $user = Auth::user();
+        
+        // Verifica si ya existe la relación
+        if ($user->books()->where('book_id', $id)->exists()) {
+            // Actualiza el pivot existente
+            $user->books()->updateExistingPivot($id, ['is_readed' => 0]);
+        } else {
+            // Crea nueva relación con el campo pivot
+            $user->books()->attach($id, ['is_readed' => 0]);
+        }
+
+        return back();
     }
 }

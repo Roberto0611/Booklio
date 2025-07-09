@@ -6,7 +6,7 @@
 
     {{-- Botón de Regresar --}}
     <div class="max-w-5xl w-full mb-6">
-        <a href="{{ url()->previous() }}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-200 ease-in-out">
+        <a href="{{ url()->previous() !== url()->current() ? url()->previous() : route('books.catalog') }}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-200 ease-in-out">
             <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
             </svg>
@@ -55,11 +55,24 @@
                     </p>
                 </div>
 
+                @php
+                    $isRead = auth()->user()->books()->where('book_id', $book->id)->wherePivot('is_readed', 1)->exists();
+                @endphp
+
                 {{-- Botones de acción (ejemplos de Flowbite) --}}
                 <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="{{route('books.toggleRead',$book->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition duration-200 ease-in-out transform hover:-translate-y-1">
-                        Marcar como leído
-                    </a>
+
+                    {{-- If the book is readed shows the mark as read button if not, show unread --}}
+                    @if (!$isRead)
+                        <a href="{{route('books.markAsRead',$book->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition duration-200 ease-in-out transform hover:-translate-y-1">
+                            Marcar como leido
+                        </a>
+                    @else
+                        <a href="{{route('books.markAsUnRead',$book->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition duration-200 ease-in-out transform hover:-translate-y-1">
+                            Quitar de leidos
+                        </a>
+                    @endif
+
                     <button type="button" class="py-3 px-6 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-200 ease-in-out transform hover:-translate-y-1">
                         Añadir a lista de deseos
                     </button>
