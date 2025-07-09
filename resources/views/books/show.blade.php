@@ -49,10 +49,10 @@
                         <strong class="font-semibold text-gray-800 dark:text-gray-200">Publicado:</strong>
                         {{ $book->published_at ? \Carbon\Carbon::parse($book->published_at)->format('j F, Y') : 'No especificado' }}
                     </p>
-                    <p class="text-gray-700 dark:text-gray-300 text-base">
+                    {{-- <p class="text-gray-700 dark:text-gray-300 text-base">
                         <strong class="font-semibold text-gray-800 dark:text-gray-200">Añadido a la biblioteca:</strong>
                         {{ \Carbon\Carbon::parse($book->created_at)->format('j F, Y') }}
-                    </p>
+                    </p> --}}
                 </div>
 
                 @php
@@ -73,9 +73,10 @@
                         </a>
                     @endif
 
-                    <button type="button" class="py-3 px-6 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-200 ease-in-out transform hover:-translate-y-1">
+                    {{-- <button type="button" class="py-3 px-6 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-200 ease-in-out transform hover:-translate-y-1">
                         Añadir a lista de deseos
-                    </button>
+                    </button> --}}
+
                     <!-- Modal toggle -->
                     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="py-3 px-6 text-base font-medium text-gray-900 focus:outline-none bg-yellow-400 rounded-lg border border-yellow-500 hover:bg-yellow-500 hover:text-white focus:z-10 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-700 dark:bg-yellow-500 dark:text-gray-900 dark:border-yellow-600 dark:hover:text-white dark:hover:bg-yellow-600 transition duration-200 ease-in-out transform hover:-translate-y-1" type="button">
                     Escribir reseña

@@ -36,7 +36,7 @@ class BookController extends Controller
             $user->books()->attach($id, ['is_readed' => 1]);
         }
 
-        return back();
+        return back()->with('alert', '¡Estado de lectura actualizado!');
     }
 
     public function markAsUnRead($id){
@@ -51,6 +51,6 @@ class BookController extends Controller
             $user->books()->attach($id, ['is_readed' => 0]);
         }
 
-        return back();
+        return back()->with('alert', '¡Estado de lectura actualizado!');
     }
 }
