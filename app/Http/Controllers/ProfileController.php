@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     public function details(){
-        return view('profile.details');
+        $lastReadBooks = Auth::user()->books()->wherePivot('is_readed', 1)->latest()->take(5)->get();
+        return view('profile.details', compact('lastReadBooks'));
     }
 
     public function edit(){

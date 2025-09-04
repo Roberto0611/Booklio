@@ -73,6 +73,27 @@
                         </a>
                     @endif
 
+                    @php
+                        $isFavorite = False;
+                    @endphp
+
+                    <button type="button"
+                       class="inline-flex items-center justify-center py-3 px-4 text-base font-medium rounded-lg border focus:outline-none focus:ring-4 transition duration-200 ease-in-out transform hover:-translate-y-1
+                           {{ $isFavorite
+                               ? 'bg-red-500 border-red-500 hover:bg-red-600 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 text-white'
+                               : 'bg-white border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-red-500 dark:hover:bg-gray-700 text-red-500'
+                           }}">
+                        @if($isFavorite)
+                            {{-- Corazón lleno --}}
+                            <svg class="w-5 h-5 me-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            Quitar de Favoritos
+                        @else
+                            {{-- Corazón delineado --}}
+                            <svg class="w-5 h-5 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                            Añadir a Favoritos
+                        @endif
+                    </button>
+
                     {{-- <button type="button" class="py-3 px-6 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-200 ease-in-out transform hover:-translate-y-1">
                         Añadir a lista de deseos
                     </button> --}}
