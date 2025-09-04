@@ -10,7 +10,8 @@ class ProfileController extends Controller
 {
     public function details(){
         $lastReadBooks = Auth::user()->books()->wherePivot('is_readed', 1)->latest()->take(5)->orderByDesc('read_at')->get();
-        return view('profile.details', compact('lastReadBooks'));
+        $favoriteBooks = Auth::user()->books()->wherePivot('is_favorite', 1)->get();
+        return view('profile.details', compact('lastReadBooks','favoriteBooks'));
     }
 
     public function edit(){

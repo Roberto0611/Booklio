@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function books(){
         return $this->belongsToMany(Book::class)
-                    ->withPivot('is_readed','is_readed') // agrega los campos que estés usando
+                    ->withPivot('is_readed','is_readed','is_favorite') // agrega los campos que estés usando
                     ->withTimestamps(); // útil si tienes created_at y updated_at
     }
 }

@@ -38,40 +38,62 @@
             <div class="lg:col-span-2 space-y-8">
 
                 {{-- Sección de Libros Favoritos --}}
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 sm:p-8">
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
-                        Libros Favoritos
-                    </h2>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                        {{-- Ejemplo de tarjeta de libro favorito (repetir con un @foreach) --}}
-                        @for ($i = 0; $i < 5; $i++)
-                        <a href="{{ route('books.show', 1) }}" class="block transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                            <img class="w-full h-auto object-cover rounded-md shadow-md"
-                                 src="https://placehold.co/150x225/333333/FFFFFF?text=Libro+Fav+{{ $i+1 }}" {{-- Placeholder de portada --}}
-                                 alt="Portada de Libro Favorito {{ $i+1 }}">
-                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-2 truncate">Título Libro {{ $i+1 }}</p>
-                        </a>
-                        @endfor 
 
-                        {{-- Agrega más libros favoritos aquí --}}
+                {{-- Comprobar si hay libros favoritos --}}
+                @if ($favoriteBooks->isEmpty())
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 sm:p-8">
+                        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
+                            Libros Favoritos
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            No tienes libros favoritos aún. ¡Empieza a marcar algunos!
+                        </p>
                     </div>
-                </div>
+                @else
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 sm:p-8">
+                        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
+                            Libros Favoritos
+                        </h2>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            @foreach ($favoriteBooks as $book)
+                                <a href="{{ route('books.show', $book->id) }}" class="block transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                                    <img class="w-full h-auto object-cover rounded-md shadow-md"
+                                        src="{{ $book->cover_image }}" 
+                                        alt="Portada de {{ $book->title }}">
+                                    <p class="text-lg font-semibold text-gray-900 dark:text-white mt-2 truncate">{{ $book->title }}</p>
+                                </a>
+                            @endforeach
+
+                        </div>
+                    </div>
+                @endif
+
+                
 
                 {{-- Sección de Libros Recientes --}}
+                
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 sm:p-8">
                     <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
                         Libros Recientes
                     </h2>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                        @foreach ($lastReadBooks as $book)
-                        <a href="{{ route('books.show', $book->id) }}" class="block transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                            <img class="w-full h-auto object-cover rounded-md shadow-md"
-                                 src="{{ $book->cover_image }}" 
-                                 alt="Portada de {{ $book->title }}">
-                            <p class="text-lg font-semibold text-gray-900 dark:text-white mt-2 truncate">{{ $book->title }}</p>
-                        </a>
-                        @endforeach
-                    </div>
+
+                    {{-- Comprobar si hay libros recientes --}}
+                    @if ($lastReadBooks->isEmpty())
+                        <p class="text-gray-600 dark:text-gray-400">
+                            No has leído ningún libro recientemente. ¡Empieza a leer!
+                        </p>
+                    @else
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            @foreach ($lastReadBooks as $book)
+                            <a href="{{ route('books.show', $book->id) }}" class="block transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                                <img class="w-full h-auto object-cover rounded-md shadow-md"
+                                    src="{{ $book->cover_image }}" 
+                                    alt="Portada de {{ $book->title }}">
+                                <p class="text-lg font-semibold text-gray-900 dark:text-white mt-2 truncate">{{ $book->title }}</p>
+                            </a>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
 
             </div>

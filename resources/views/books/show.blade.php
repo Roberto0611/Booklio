@@ -14,6 +14,15 @@
         </a>
     </div>
 
+    {{--Checar si se retorno alguna alerta --}}
+    @if (session('alert'))
+        <div class="max-w-5xl w-full mb-6">
+            <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-900 dark:text-red-200" role="alert">
+                <span class="font-medium">Alerta!</span> {{ session('alert') }}
+            </div>
+        </div>
+    @endif
+
     {{-- Contenedor centrado para la tarjeta del libro --}}
     <div class="max-w-5xl w-full bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-[1.01] mb-10"> {{-- Añadido mb-10 para espacio con la sección de reseñas --}}
         <div class="md:flex">
@@ -74,10 +83,14 @@
                     @endif
 
                     @php
-                        $isFavorite = False;
+                        if(auth()->check()){
+                            $isFavorite = auth()->user()->books()->where('book_id', $book->id)->wherePivot('is_favorite', 1)->exists();
+                        } else {
+                            $isFavorite = false;
+                        }
                     @endphp
 
-                    <button type="button"
+                    <a href="{{ $isFavorite ? route('books.markAsUnFavorite', $book->id) : route('books.markAsFavorite', $book->id) }}"
                        class="inline-flex items-center justify-center py-3 px-4 text-base font-medium rounded-lg border focus:outline-none focus:ring-4 transition duration-200 ease-in-out transform hover:-translate-y-1
                            {{ $isFavorite
                                ? 'bg-red-500 border-red-500 hover:bg-red-600 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 text-white'
@@ -92,7 +105,7 @@
                             <svg class="w-5 h-5 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                             Añadir a Favoritos
                         @endif
-                    </button>
+                    </a>
 
                     {{-- <button type="button" class="py-3 px-6 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-200 ease-in-out transform hover:-translate-y-1">
                         Añadir a lista de deseos

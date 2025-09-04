@@ -22,6 +22,10 @@ Route::get('/books/{book}/markAsread',[BookController::class, 'markAsRead'])->na
 
 Route::get('/books/{book}/unread',[BookController::class, 'markAsUnRead'])->name('books.markAsUnRead')->middleware('auth');
 
+Route::get('/books/{book}/markAsFavorite',[BookController::class, 'markAsFavorite'])->name('books.markAsFavorite')->middleware('auth');
+
+Route::get('/books/{book}/markAsUnFavorite',[BookController::class, 'markAsUnFavorite'])->name('books.markAsUnFavorite')->middleware('auth');
+
 // -------  Profile routes ------- 
 
 Route::get('/profile/details', [ProfileController::class, 'details'])->name('profile')->middleware('auth');
