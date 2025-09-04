@@ -30,10 +30,10 @@ class BookController extends Controller
         // Verifica si ya existe la relación
         if ($user->books()->where('book_id', $id)->exists()) {
             // Actualiza el pivot existente
-            $user->books()->updateExistingPivot($id, ['is_readed' => 1]);
+            $user->books()->updateExistingPivot($id, ['is_readed' => 1,'read_at' => now()]);
         } else {
             // Crea nueva relación con el campo pivot
-            $user->books()->attach($id, ['is_readed' => 1]);
+            $user->books()->attach($id, ['is_readed' => 1, 'read_at' => now()]);
         }
 
         return back()->with('alert', '¡Estado de lectura actualizado!');

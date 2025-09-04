@@ -51,7 +51,7 @@
                                  alt="Portada de Libro Favorito {{ $i+1 }}">
                             <p class="text-sm text-gray-700 dark:text-gray-300 mt-2 truncate">Título Libro {{ $i+1 }}</p>
                         </a>
-                        @endfor
+                        @endfor 
 
                         {{-- Agrega más libros favoritos aquí --}}
                     </div>
@@ -68,7 +68,6 @@
                             <img class="w-full h-auto object-cover rounded-md shadow-md"
                                  src="{{ $book->cover_image }}" 
                                  alt="Portada de {{ $book->title }}">
-                            {{-- Título más grande y con peso --}}
                             <p class="text-lg font-semibold text-gray-900 dark:text-white mt-2 truncate">{{ $book->title }}</p>
                         </a>
                         @endforeach

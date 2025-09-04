@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('book_id')->constrained()->onDelete('cascade');
 
-            $table->date('read_at')->nullable(); // fecha en que lo leyó
+            $table->timestamp('read_at')->nullable(); // fecha en que lo leyó
             $table->boolean('is_readed')->default(false); // si lo ha leido
             $table->boolean('is_favorite')->default(false); // si es favorito
             $table->boolean('is_wishlist')->default(false); // si lo tiene en la lista de deseos

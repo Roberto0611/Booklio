@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
     public function details(){
-        $lastReadBooks = Auth::user()->books()->wherePivot('is_readed', 1)->latest()->take(5)->get();
+        $lastReadBooks = Auth::user()->books()->wherePivot('is_readed', 1)->latest()->take(5)->orderByDesc('read_at')->get();
         return view('profile.details', compact('lastReadBooks'));
     }
 
