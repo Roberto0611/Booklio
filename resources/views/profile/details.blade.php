@@ -52,6 +52,7 @@
                             <p class="text-sm text-gray-700 dark:text-gray-300 mt-2 truncate">Título Libro {{ $i+1 }}</p>
                         </a>
                         @endfor
+
                         {{-- Agrega más libros favoritos aquí --}}
                     </div>
                 </div>
@@ -62,16 +63,15 @@
                         Libros Recientes
                     </h2>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                        {{-- Ejemplo de tarjeta de libro reciente (repetir con un @foreach) --}}
-                        @for ($i = 0; $i < 10; $i++)
-                        <a href="{{ route('books.show', 1) }}" class="block transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                        @foreach ($lastReadBooks as $book)
+                        <a href="{{ route('books.show', $book->id) }}" class="block transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
                             <img class="w-full h-auto object-cover rounded-md shadow-md"
-                                 src="https://placehold.co/150x225/555555/FFFFFF?text=Libro+Rec+{{ $i+1 }}" {{-- Placeholder de portada --}}
-                                 alt="Portada de Libro Reciente {{ $i+1 }}">
-                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-2 truncate">Título Reciente {{ $i+1 }}</p>
+                                 src="{{ $book->cover_image }}" 
+                                 alt="Portada de {{ $book->title }}">
+                            {{-- Título más grande y con peso --}}
+                            <p class="text-lg font-semibold text-gray-900 dark:text-white mt-2 truncate">{{ $book->title }}</p>
                         </a>
-                        @endfor
-                        {{-- Agrega más libros recientes aquí --}}
+                        @endforeach
                     </div>
                 </div>
 
