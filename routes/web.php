@@ -33,6 +33,9 @@ Route::get('/profile/details', [ProfileController::class, 'details'])->name('pro
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('editProfile')->middleware('auth');
 
 Route::put('/profile/edit', [ProfileController::class,'update'])->name('editProfileLogic')->middleware('auth');
+
+Route::get('/profile/recent-books', [ProfileController::class, 'recentBooks'])->name('profile.recentBooks')->middleware('auth');
+
 // ------- Log-in routes ------- 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

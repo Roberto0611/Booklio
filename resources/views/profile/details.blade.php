@@ -73,9 +73,13 @@
                 {{-- Sección de Libros Recientes --}}
                 
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 sm:p-8">
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
-                        Libros Recientes
-                    </h2>
+                    <div class="flex items-center justify-between mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
+                        <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                            Libros Recientes
+                        </h2>
+                        <a href="{{route('profile.recentBooks')}}" class="text-sm text-blue-600 hover:underline dark:text-blue-400">Ver todos los recientes</a>
+                    </div>
+                    
 
                     {{-- Comprobar si hay libros recientes --}}
                     @if ($lastReadBooks->isEmpty())

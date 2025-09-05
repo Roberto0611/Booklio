@@ -44,4 +44,9 @@ class ProfileController extends Controller
         
         return redirect(route('profile'));
     }
+
+    public function recentBooks(){
+        $recentBooks = Auth::user()->books()->wherePivot('is_readed', 1)->latest()->orderByDesc('read_at')->get();
+        return view('profile.recentBooks', data: compact('recentBooks'));
+    }
 }
