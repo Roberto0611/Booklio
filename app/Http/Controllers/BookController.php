@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -89,4 +90,26 @@ class BookController extends Controller
 
         return back()->with('alert', '¡Libro desmarcado como favorito!');
     }
+
+    public function storeReview(Request $request, $id){
+        $request->validate([
+            'review' => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        $user = Auth::user();
+        $book = Book::find($id);
+
+    $review = new Review();
+    $review->user_id = $user->id;
+    $review->book_id = $book->id;
+    // column name in the migration is 'review'
+    $review->review = $request->review;
+    $review->rating = $request->rating;
+
+    $review->save();
+
+        return back()->with('sucess', '¡Reseña enviada con éxito!');
+    }
+
 }
