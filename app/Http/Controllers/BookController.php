@@ -22,10 +22,20 @@ class BookController extends Controller
     public function show($id){
         $book = Book::find($id);
 
+        # check if the user has reviewed the book
+        $user = Auth::user();
+
+        if ($user->reviews()->where('book_id', $id)->exists()) {
+            $userReview = $user->reviews()->where('book_id', $id)->first();
+        } else {
+            $userReview = null;
+        }
+
+
         # get the reviews for the book
         $reviews = Review::where('book_id', $id)->latest()->take(5)->get();
-
-        return view('books.show',compact('book','reviews'));
+        
+        return view('books.show',compact('book','reviews','userReview'));
     }
 
     public function markAsRead($id){
@@ -115,4 +125,27 @@ class BookController extends Controller
         return back()->with('sucess', '¡Reseña enviada con éxito!');
     }
 
+    public function editReview(Request $request, $id){
+        $request->validate([
+            'review' => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        $user = Auth::user();
+        $book = Book::find($id);
+
+        // find the review by the user for the book
+        $review = Review::where('user_id', $user->id)->where('book_id', $book->id)->first();
+
+        if (!$review) {
+            return back()->with('error', '¡No se encontró la reseña para editar!');
+        }
+
+        $review->review = $request->review;
+        $review->rating = $request->rating;
+
+        $review->save();
+
+        return back()->with('sucess', '¡Reseña editada con éxito!');
+    }
 }

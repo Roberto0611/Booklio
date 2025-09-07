@@ -26,7 +26,9 @@ Route::get('/books/{book}/markAsFavorite',[BookController::class, 'markAsFavorit
 
 Route::get('/books/{book}/markAsUnFavorite',[BookController::class, 'markAsUnFavorite'])->name('books.markAsUnFavorite')->middleware('auth');
 
-Route::post('/books/{book}/reviews',[BookController::class, 'storeReview'])->name('books.reviews.store')->middleware('auth');
+Route::post('/books/{book}/StoreReview',[BookController::class, 'storeReview'])->name('books.reviews.store')->middleware('auth');
+
+Route::post('/books/{book}/EditReview',[BookController::class, 'editReview'])->name('books.reviews.edit')->middleware('auth');
 
 // -------  Profile routes ------- 
 

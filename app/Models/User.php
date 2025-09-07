@@ -52,4 +52,8 @@ class User extends Authenticatable
                     ->withPivot('is_readed','is_readed','is_favorite') // agrega los campos que estés usando
                     ->withTimestamps(); // útil si tienes created_at y updated_at
     }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
 }
