@@ -137,24 +137,39 @@
             Reseñas
         </h2>
 
-        {{-- Contenedor para las reseñas (vacío por ahora) --}}
+        {{-- Contenedor para las reseñas --}}
         <div class="space-y-6">
-            <p class="text-gray-600 dark:text-gray-400">
-                Aún no hay reseñas para este libro. ¡Sé el primero en escribir una!
-            </p>
-            {{-- Aquí se mostrarán las reseñas dinámicamente en el futuro --}}
-            {{-- Ejemplo de una reseña --}}
-            
-            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
-                <div class="flex items-center mb-2">
-                    <img class="w-8 h-8 rounded-full mr-3" src="https://placehold.co/32x32/cccccc/333333?text=U" alt="User Avatar">
-                    <p class="font-semibold text-gray-800 dark:text-gray-200">Nombre de Usuario</p>
-                    <span class="text-sm text-gray-500 dark:text-gray-400 ml-auto">25 de Junio, 2025</span>
-                </div>
-                <p class="text-gray-700 dark:text-gray-300 text-sm">
-                    ¡Este libro es increíble! Me ayudó a cambiar mis hábitos de una manera muy efectiva. Totalmente recomendado.
+            @if ($reviews->isEmpty())
+                <p class="text-gray-600 dark:text-gray-400">
+                    Aún no hay reseñas para este libro. ¡Sé el primero en escribir una!
                 </p>
-            </div>
+            @endif
+            
+            {{-- Reviews --}}
+            
+            @foreach ($reviews as $review)
+                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-2">
+                        <img class="w-8 h-8 rounded-full mr-3" src="{{ $review->user->photo }}" alt="User Avatar">
+                        <p class="font-semibold text-gray-800 dark:text-gray-200 ml-2">{{ $review->user->name }}</p>
+
+                        {{-- Stars (1..5) showing the review rating --}}
+                        <div class="flex items-center ml-4">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <svg class="w-4 h-4 me-1 {{ $i <= ($review->rating ?? 0) ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600' }}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.966a1 1 0 00.95.69h4.166c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.286 3.966c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.448c-.784.57-1.84-.197-1.54-1.118l1.286-3.966a1 1 0 00-.364-1.118L2.642 9.393c-.783-.57-.38-1.81.588-1.81h4.166a1 1 0 00.95-.69L9.049 2.927z"/>
+                                </svg>
+                            @endfor
+                        </div>
+
+                        <span class="text-sm text-gray-500 dark:text-gray-400 ml-auto">{{ $review->created_at ? $review->created_at->format('j F, Y') : '' }}</span>
+                    </div>
+
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">
+                        {{ $review->review }}
+                    </p>
+                </div>
+            @endforeach
             
         </div>
     </div>

@@ -22,7 +22,10 @@ class BookController extends Controller
     public function show($id){
         $book = Book::find($id);
 
-        return view('books.show',compact('book'));
+        # get the reviews for the book
+        $reviews = Review::where('book_id', $id)->latest()->take(5)->get();
+
+        return view('books.show',compact('book','reviews'));
     }
 
     public function markAsRead($id){
