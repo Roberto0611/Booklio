@@ -26,9 +26,11 @@ Route::get('/books/{book}/markAsFavorite',[BookController::class, 'markAsFavorit
 
 Route::get('/books/{book}/markAsUnFavorite',[BookController::class, 'markAsUnFavorite'])->name('books.markAsUnFavorite')->middleware('auth');
 
-Route::post('/books/{book}/StoreReview',[BookController::class, 'storeReview'])->name('books.reviews.store')->middleware('auth');
+Route::post('/books/{book}/storeReview',[BookController::class, 'storeReview'])->name('books.reviews.store')->middleware('auth');
 
-Route::post('/books/{book}/EditReview',[BookController::class, 'editReview'])->name('books.reviews.edit')->middleware('auth');
+Route::post('/books/{book}/editReview',[BookController::class, 'editReview'])->name('books.reviews.edit')->middleware('auth');
+
+Route::delete('/books/{book}/destroyReview',[BookController::class, 'destroyReview'])->name('books.reviews.destroy')->middleware('auth');
 
 // -------  Profile routes ------- 
 

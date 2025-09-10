@@ -113,14 +113,24 @@ class BookController extends Controller
         $user = Auth::user();
         $book = Book::find($id);
 
-    $review = new Review();
-    $review->user_id = $user->id;
-    $review->book_id = $book->id;
-    // column name in the migration is 'review'
-    $review->review = $request->review;
-    $review->rating = $request->rating;
+        // Comprobate if theres an existing review by the user for the book
+        $existingReview = Review::where('user_id', $user->id)->where('book_id', $book->id)->first();
 
-    $review->save();
+        if ($existingReview) {
+            return back()->with('error', '¡Ya has enviado una reseña para este libro!');
+        }
+
+        $user = Auth::user();
+        $book = Book::find($id);
+
+        $review = new Review();
+        $review->user_id = $user->id;
+        $review->book_id = $book->id;
+        // column name in the migration is 'review'
+        $review->review = $request->review;
+        $review->rating = $request->rating;
+
+        $review->save();
 
         return back()->with('sucess', '¡Reseña enviada con éxito!');
     }
@@ -147,5 +157,21 @@ class BookController extends Controller
         $review->save();
 
         return back()->with('sucess', '¡Reseña editada con éxito!');
+    }
+
+    public function destroyReview(Request $request, $id){
+        $user = Auth::user();
+        $book = Book::find($id);
+
+        // find the review by the user for the book
+        $review = Review::where('user_id', $user->id)->where('book_id', $book->id)->first();
+
+        if (!$review) {
+            return back()->with('error', '¡No se encontró la reseña para eliminar!');
+        }
+
+        $review->delete();
+
+        return back()->with('delete', '¡Reseña eliminada con éxito!');
     }
 }

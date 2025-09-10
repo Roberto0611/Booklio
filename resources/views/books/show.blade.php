@@ -31,6 +31,13 @@
         </div>
     @endif
 
+    @if (session('delete'))
+        <div class="max-w-5xl w-full mb-6">
+            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-900 dark:text-green-200" role="status">
+                <span class="font-medium">reseña eliminada con exito! </span> {{ session('delete') }}
+            </div>
+        </div>
+    @endif
     {{-- Contenedor centrado para la tarjeta del libro --}}
     <div class="max-w-5xl w-full bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-[1.01] mb-10"> {{-- Añadido mb-10 para espacio con la sección de reseñas --}}
         <div class="md:flex">
@@ -134,8 +141,10 @@
 
     {{-- Modals --}}
     <x-modalReview :book="$book" />
-    <x-modalEditReview :book="$book" :review="$userReview" />
-
+    @if ($userReview != null)
+        <x-modalEditReview :book="$book" :review="$userReview" />
+    @endif
+    
     {{-- Sección de Reseñas --}}
     <div class="max-w-5xl w-full bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
