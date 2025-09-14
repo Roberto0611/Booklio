@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\friendshipController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Book;
@@ -43,7 +44,7 @@ Route::put('/profile/edit', [ProfileController::class,'update'])->name('editProf
 Route::get('/profile/recent-books', [ProfileController::class, 'recentBooks'])->name('profile.recentBooks')->middleware('auth');
 
 // ------- Friends routes -------
-Route::get('/friends/index', [ProfileController::class, 'indexFriends'])->name('friends.index')->middleware('auth');
+Route::get('/friends/index', [friendshipController::class, 'index'])->name('friends.index')->middleware('auth');
 
 // ------- Log-in routes ------- 
 
