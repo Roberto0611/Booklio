@@ -14,6 +14,11 @@ class ProfileController extends Controller
         return view('profile.details', compact('lastReadBooks','favoriteBooks'));
     }
 
+    public function indexFriends(){
+        // This method can be used to show friends or other related data
+        return view('friends.index');
+    }
+
     public function edit(){
         return view('profile.edit');
     }
