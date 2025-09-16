@@ -54,14 +54,14 @@
                         Editar Perfil
                     </a>    
                 @elseif ($isFollowing == false)
-                    <a href="{{route('friends.follow',$user->id)}}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg" title="Seguir a {{ $user->name }}">
+                    <a href="{{route('friends.follow',$user->id)}}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg" title="Seguir a {{ $user->name }}" data-once>
                         <svg class="w-5 h-5 me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
                         </svg>
                         Seguir
                     </a>
                 @else   
-                    <a href="{{route('friends.unfollow',$user->id)}}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800 dark:focus:ring-red-900 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg" title="Dejar de seguir a {{ $user->name }}">
+                    <a href="{{route('friends.unfollow',$user->id)}}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800 dark:focus:ring-red-900 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg" title="Dejar de seguir a {{ $user->name }}" data-once>
                         <svg class="w-5 h-5 me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
                         </svg>
