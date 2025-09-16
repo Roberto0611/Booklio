@@ -7,7 +7,7 @@
         {{-- Barra de encabezado: regresar + título --}}
         <div class="flex items-center justify-between mb-8">
             <div>
-                <a href="{{ route('profile') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700 transition">
+                <a href="{{ route('profile', $id) }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700 transition">
                     ← Volver al perfil
                 </a>
             </div>
@@ -15,7 +15,7 @@
                 <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-1">
                     Libros leídos
                 </h1>
-                <p class="text-gray-600 dark:text-gray-400">Aquí verás todos los libros que has marcado como leídos.</p>
+                <p class="text-gray-600 dark:text-gray-400">Aquí verás todos los libros que {{ $user->name }} ha marcado como leídos.</p>
             </div>
             <div class="w-24">&nbsp;</div>
         </div>

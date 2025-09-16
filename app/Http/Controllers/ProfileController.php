@@ -20,9 +20,17 @@ class ProfileController extends Controller
                 ->where('status', 'accepted')
                 ->exists();
 
+        $followers = Friendship::where('friend_id', $user->id)
+                ->where('status', 'accepted')
+                ->count();
+        
+        $following = Friendship::where('user_id', $user->id)
+                ->where('status', 'accepted')
+                ->count();
+
         $lastReadBooks = $user->books()->wherePivot('is_readed', 1)->latest()->take(5)->orderByDesc('read_at')->get();
         $favoriteBooks = $user->books()->wherePivot('is_favorite', 1)->get();
-        return view('profile.details', compact('id','lastReadBooks','favoriteBooks','user','isFollowing'));
+        return view('profile.details', compact('id','lastReadBooks','favoriteBooks','user','isFollowing','followers','following'));
     }
 
     public function edit(){
@@ -56,8 +64,9 @@ class ProfileController extends Controller
         return redirect(route('profile'));
     }
 
-    public function recentBooks(){
-        $recentBooks = Auth::user()->books()->wherePivot('is_readed', 1)->latest()->orderByDesc('read_at')->get();
-        return view('profile.recentBooks', data: compact('recentBooks'));
+    public function recentBooks($id){
+        $user = User::findOrFail($id);
+        $recentBooks = $user->books()->wherePivot('is_readed', 1)->latest()->orderByDesc('read_at')->get();
+        return view('profile.recentBooks', data: compact('recentBooks', 'id', 'user'));
     }
 }

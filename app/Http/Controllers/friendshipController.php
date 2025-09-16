@@ -60,4 +60,27 @@ class friendshipController extends Controller
 
         return redirect()->back()->with('success', 'Dejaste de seguir a ' . $friend->name);
     }
+
+    public function list($id,$tab){
+        $user = User::findOrFail($id);
+        if ($tab == 'following') {
+            $list = Friendship::where('user_id', $user->id)
+                    ->where('status', 'accepted')
+                    ->with('friend')
+                    ->get()
+                    ->map(function($friendship) {
+                        return $friendship->friend;
+                    });
+            return view('friends.list', compact('list', 'user', 'tab'));
+        } else if ($tab == 'followers') {
+            $list = Friendship::where('friend_id', $user->id)
+                    ->where('status', 'accepted')
+                    ->with('user')
+                    ->get()
+                    ->map(function($friendship) {
+                        return $friendship->user;
+                    });
+            return view('friends.list', compact('list', 'user', 'tab'));
+        }
+    }
 }

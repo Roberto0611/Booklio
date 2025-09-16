@@ -13,6 +13,14 @@ class Friendship extends Model
         'status',
     ];
 
-    // Si tu tabla no tiene created_at/updated_at, descomenta la siguiente línea:
-    // public $timestamps = false;
+    // Definir las relaciones si es necesario
+    public function friend()
+    {
+        return $this->belongsTo(User::class, 'friend_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

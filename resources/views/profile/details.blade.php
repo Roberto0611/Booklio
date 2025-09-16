@@ -46,6 +46,18 @@
                     {{ $user->bio }}
                 </p>
 
+                {{-- Contadores: Seguidos y Seguidores --}}
+                <div class="mt-4 flex items-center justify-center md:justify-start gap-5">
+                    <a href="{{ route('friends.list', ['id' => $user->id, 'tab' => 'following']) }}" class="inline-flex items-center gap-2 group" title="Ver seguidos">
+                        <span class="text-sm font-medium text-gray-600 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-blue-400">Seguidos</span>
+                        <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 group-hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200">{{$following}}</span>
+                    </a>
+                    <a href="{{ route('friends.list', ['id' => $user->id, 'tab' => 'followers']) }}" class="inline-flex items-center gap-2 group" title="Ver seguidores">
+                        <span class="text-sm font-medium text-gray-600 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-blue-400">Seguidores</span>
+                        <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 group-hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200">{{$followers}}</span>
+                    </a>
+                </div>
+
                 {{-- Botónes --}}
                 <div class="mt-6">
                 @if (Auth::id() === $user->id)
@@ -117,7 +129,7 @@
                         <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
                             Libros Recientes
                         </h2>
-                        <a href="{{route('profile.recentBooks')}}" class="text-sm text-blue-600 hover:underline dark:text-blue-400">Ver todos los recientes</a>
+                        <a href="{{route('profile.recentBooks', $user->id)}}" class="text-sm text-blue-600 hover:underline dark:text-blue-400">Ver todos los recientes</a>
                     </div>
                     
 
