@@ -14,6 +14,20 @@
             </a>
         </div>
 
+        {{-- Alerta de éxito al seguir a un usuario --}}
+        @if (session('success'))
+            <div class="mb-6">
+                <div class="flex items-start p-4 text-sm text-green-800 bg-green-50 border border-green-200 rounded-lg dark:bg-gray-800 dark:text-green-400 dark:border-green-700" role="alert">
+                    <svg class="flex-shrink-0 w-5 h-5 me-3 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                        <span class="font-medium">Éxito:</span> {{ session('success') }}
+                    </div>
+                </div>
+            </div>
+        @endif
+
         {{-- Sección del encabezado del perfil (Foto, Nombre, Bio, Botón Editar) --}}
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 sm:p-8 lg:p-10 mb-8 flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
             {{-- Foto de Perfil --}}
@@ -32,20 +46,27 @@
                     {{ $user->bio }}
                 </p>
 
-                {{-- Botón de Editar Información --}}
+                {{-- Botónes --}}
                 <div class="mt-6">
                 @if (Auth::id() === $user->id)
                     <a href="{{route('editProfile')}}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg">
                         <svg class="w-5 h-5 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                         Editar Perfil
                     </a>    
-                @else
-                    <a href="#" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg" title="Seguir a {{ $user->name }}">
+                @elseif ($isFollowing == false)
+                    <a href="{{route('friends.follow',$user->id)}}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg" title="Seguir a {{ $user->name }}">
                         <svg class="w-5 h-5 me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
                         </svg>
                         Seguir
                     </a>
+                @else   
+                    <a href="{{route('friends.unfollow',$user->id)}}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800 dark:focus:ring-red-900 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg" title="Dejar de seguir a {{ $user->name }}">
+                        <svg class="w-5 h-5 me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                        </svg>
+                        Dejar de seguir
+                    </a>                 
                 @endif
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Friendship;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -11,10 +12,17 @@ class ProfileController extends Controller
 {
     public function details($id){
         $user = User::findOrFail($id);
+        $currentUser = Auth::user();
+        
+        # check if the user follows this profile
+        $isFollowing = Friendship::where('user_id', $currentUser->id)
+                ->where('friend_id', $user->id)
+                ->where('status', 'accepted')
+                ->exists();
 
         $lastReadBooks = $user->books()->wherePivot('is_readed', 1)->latest()->take(5)->orderByDesc('read_at')->get();
         $favoriteBooks = $user->books()->wherePivot('is_favorite', 1)->get();
-        return view('profile.details', compact('id','lastReadBooks','favoriteBooks','user'));
+        return view('profile.details', compact('id','lastReadBooks','favoriteBooks','user','isFollowing'));
     }
 
     public function edit(){

@@ -44,8 +44,12 @@ Route::put('/profile/edit', [ProfileController::class,'update'])->name('editProf
 Route::get('/profile/recent-books', [ProfileController::class, 'recentBooks'])->name('profile.recentBooks')->middleware('auth');
 
 // ------- Friends routes -------
+
 Route::get('/friends/index', [friendshipController::class, 'index'])->name('friends.index')->middleware('auth');
 
+Route::get('/friends/{id}/follow', [friendshipController::class, 'follow'])->name('friends.follow')->middleware('auth');
+
+Route::get('/friends/{id}/unfollow', [friendshipController::class, 'unfollow'])->name('friends.unfollow')->middleware('auth');
 // ------- Log-in routes ------- 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
