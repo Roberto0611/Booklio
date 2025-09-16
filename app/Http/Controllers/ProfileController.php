@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function details(){
-        $lastReadBooks = Auth::user()->books()->wherePivot('is_readed', 1)->latest()->take(5)->orderByDesc('read_at')->get();
-        $favoriteBooks = Auth::user()->books()->wherePivot('is_favorite', 1)->get();
-        return view('profile.details', compact('lastReadBooks','favoriteBooks'));
+    public function details($id){
+        $user = User::findOrFail($id);
+
+        $lastReadBooks = $user->books()->wherePivot('is_readed', 1)->latest()->take(5)->orderByDesc('read_at')->get();
+        $favoriteBooks = $user->books()->wherePivot('is_favorite', 1)->get();
+        return view('profile.details', compact('id','lastReadBooks','favoriteBooks','user'));
     }
 
     public function edit(){

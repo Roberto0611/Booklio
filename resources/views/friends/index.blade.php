@@ -65,7 +65,7 @@
 			</div>
 			<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 @foreach ($recommendations as $user)
-					<a href="#" class="group flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:shadow-lg transition-shadow">
+					<a href="{{route('profile', ['id' => $user->id])}}" class="group flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:shadow-lg transition-shadow">
 						<img class="w-20 h-20 rounded-full object-cover ring-2 ring-blue-500/20 group-hover:ring-blue-500/40" src="{{ $user->photo }}" alt="Avatar de {{ $user->name }}">
 						<span class="mt-2 text-sm font-medium text-gray-900 dark:text-white">{{ $user->name }}</span>
 						<span class="text-xs text-gray-500 dark:text-gray-400 text-center block" title="{{ $user->bio }}">{{ \Illuminate\Support\Str::words($user->bio, 12, '...') }}</span>

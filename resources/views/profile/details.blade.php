@@ -4,30 +4,49 @@
 {{-- Contenedor principal de la página de perfil --}}
 <div class="min-h-screen bg-gray-100 dark:bg-gray-900 py-10 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
+        {{-- Botón de Regresar --}}
+        <div class="mb-6">
+            <a href="{{ url()->previous() !== url()->current() ? url()->previous() : route('books.catalog') }}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition duration-200 ease-in-out">
+                <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+                </svg>
+                Regresar
+            </a>
+        </div>
 
         {{-- Sección del encabezado del perfil (Foto, Nombre, Bio, Botón Editar) --}}
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 sm:p-8 lg:p-10 mb-8 flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
             {{-- Foto de Perfil --}}
             <div class="flex-shrink-0">
                 <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-blue-500 dark:border-blue-400 shadow-lg"
-                     src="{{Auth::user()->photo}}" 
-                     alt="Foto de perfil de [Nombre de Usuario]">
+                     src="{{ $user->photo }}" 
+                     alt="Foto de perfil de {{ $user->name }}">
             </div>
 
             {{-- Información del Usuario --}}
             <div class="flex-grow text-center md:text-left">
                 <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white mb-2">
-                    {{Auth::user()->name}}
+                    {{$user->name}}
                 </h1>
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed max-w-2xl md:mx-0 mx-auto">
-                    {{Auth::user()->bio}}
+                    {{ $user->bio }}
                 </p>
+
                 {{-- Botón de Editar Información --}}
                 <div class="mt-6">
+                @if (Auth::id() === $user->id)
                     <a href="{{route('editProfile')}}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg">
                         <svg class="w-5 h-5 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                         Editar Perfil
+                    </a>    
+                @else
+                    <a href="#" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg" title="Seguir a {{ $user->name }}">
+                        <svg class="w-5 h-5 me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                        </svg>
+                        Seguir
                     </a>
+                @endif
                 </div>
             </div>
         </div>

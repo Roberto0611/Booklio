@@ -35,7 +35,7 @@ Route::delete('/books/{book}/destroyReview',[BookController::class, 'destroyRevi
 
 // -------  Profile routes ------- 
 
-Route::get('/profile/details', [ProfileController::class, 'details'])->name('profile')->middleware('auth');
+Route::get('/profile/details/{id}', [ProfileController::class, 'details'])->name('profile')->middleware('auth');
 
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('editProfile')->middleware('auth');
 
