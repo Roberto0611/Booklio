@@ -32,7 +32,7 @@
                     </p>
                 </div>
                 <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-sm font-semibold">
-                    Total: 12
+                    Total: {{ $list->count() }} 
                 </div>
             </div>
         </div>
@@ -40,6 +40,21 @@
         {{-- Lista de usuarios (placeholders puros) --}}
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 sm:p-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                @if ($list->isEmpty())
+                    <div class="col-span-full">
+                        <div class="text-center py-16">
+                            <div class="mx-auto w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700/50 flex items-center justify-center mb-4">
+                                <svg class="w-8 h-8 text-gray-500 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 16.318A4.486 4.486 0 0 0 12.016 15a4.486 4.486 0 0 0-3.198 1.318M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Sin resultados</h3>
+                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Aún no hay usuarios en esta lista.</p>
+                        </div>
+                    </div>
+                @endif
+
                 @foreach ($list as $user)
                     <a href="{{ route('profile', ['id' => $user->id]) }}" class="group block relative overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition duration-300 hover:shadow-lg">
                         <div class="p-4 flex items-center gap-4">
@@ -53,6 +68,9 @@
                         </div>
                     </a>
                 @endforeach
+            </div>
+            <div class="mt-4">
+                {{$list->links()}}
             </div>
         </div>
     </div>

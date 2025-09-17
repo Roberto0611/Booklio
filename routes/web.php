@@ -52,6 +52,8 @@ Route::get('/friends/{id}/follow', [friendshipController::class, 'follow'])->nam
 Route::get('/friends/{id}/unfollow', [friendshipController::class, 'unfollow'])->name('friends.unfollow')->middleware('auth');
 
 Route::get('/friends/list/{id}/{tab}', [friendshipController::class, 'list'])->name('friends.list')->middleware('auth');
+
+Route::get('/friends/search', [friendshipController::class, 'search'])->name('friends.search')->middleware('auth');
 // ------- Log-in routes ------- 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
